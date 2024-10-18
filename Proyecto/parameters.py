@@ -29,7 +29,7 @@ def get_data(csv_type):
   
   # Crear conjuntos
   
-  E = list(range(len(cos_hor)))
+  E = list(range(len(des_sit)))
   S = list(range(len(des_sit)))
   D = list(range(len(des_sit.columns)))
   TH = list(range(24))
@@ -40,6 +40,7 @@ def get_data(csv_type):
 
   CO_ed = {(i, j): int(cos_opor.iat[i, j]) for i in E for j in D}
   CD_ed = {(i, j): int(cos_despl.iat[i, j]) for i in E for j in D}
+  #CH ver que onda 
 
 
 
