@@ -20,7 +20,7 @@ def get_data(csv_type):
     pue_encarg = pd.read_csv(
       'source/small/puede_encargarse.csv', header=None)
         
-  elif csv_type == "real":
+  #elif csv_type == "real":
   #elif OTRA BASE
   #elif OTRA BASE
 
