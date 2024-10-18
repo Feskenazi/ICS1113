@@ -41,6 +41,6 @@ def get_data(csv_type):
   CO_ed = {(i, j): int(cos_opor.iat[i, j]) for i in E for j in D}
   CD_ed = {(i, j): int(cos_despl.iat[i, j]) for i in E for j in D}
   #CH ver que onda 
-
+  SD_sd = {(i, j): int(des_sit.iat[i, j]) for i in S for j in D}
 
 
