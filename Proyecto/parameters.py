@@ -34,9 +34,7 @@ def get_data(csv_type):
   D = list(range(len(des_sit.columns)))
   TH = list(range(24))
   TD = list(range(7))
-  TS = list(range(4))
-  
-  # Crear parámetros
+  TS = list(range(4))# Crear parámetros
   
 
 
