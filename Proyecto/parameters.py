@@ -30,6 +30,8 @@ def get_data(csv_type):
   # Crear conjuntos
 
   E = list(range())
+  S = list(range())
+  D = list(range())
 
 
 
