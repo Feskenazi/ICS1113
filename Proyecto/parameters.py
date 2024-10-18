@@ -26,17 +26,18 @@ def get_data(csv_type):
 
 
   # COMPARTIDO--------------------
-
+  
   # Crear conjuntos
-
-  E = list(range(cos_hor))
-  S = list(range())
-  D = list(range())
-
-
-
-
-
+  
+  E = list(range(len(cos_hor)))
+  S = list(range(len(des_sit)))
+  D = list(range(len(des_sit.columns)))
+  TH =
+  TD =
+  TS =
+  
+  # Crear parámetros
+  
 
 
 
