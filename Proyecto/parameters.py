@@ -5,16 +5,36 @@ import pandas as pd
 def get_data(csv_type):
   
   if csv_type == "small":
-
+    
     #BASE DE DATOS PEQUEÑA
     cos_opor = pd.read_csv(
       'source/small/costo_oportunidad.csv', header=None)
     cos_despl = pd.read_csv(
       'source/small/costos_por_despliegue.csv', header=None)
-      
+    cos_hor = pd.read_csv(
+      'source/small/costos_por_hora.csv', header=None)
+    des_sit = pd.read_csv(
+      'source/small/desastre_del_sitio.csv', header=None)
+    hor_arreg = pd.read_csv(
+      'source/small/horas_arreglo.csv', header=None)
+    pue_encarg = pd.read_csv(
+      'source/small/puede_encargarse.csv', header=None)
+        
+  elif csv_type == "real":
+  #elif OTRA BASE
+  #elif OTRA BASE
 
-    
-    
+
+  # COMPARTIDO--------------------
+
+  # Crear conjuntos
+
+  E = list(range())
+
+
+
+
+
 
 
 
