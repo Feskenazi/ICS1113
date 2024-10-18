@@ -29,7 +29,7 @@ def get_data(csv_type):
   
   # Crear conjuntos
   
-  E = list(range(len(des_sit)))
+  E = list(range(len(cos_despl)))
   S = list(range(len(des_sit)))
   D = list(range(len(des_sit.columns)))
   TH = list(range(24))
