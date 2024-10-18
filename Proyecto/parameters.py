@@ -29,7 +29,7 @@ def get_data(csv_type):
 
   # Crear conjuntos
 
-  E = list(range())
+  E = list(range(cos_hor))
   S = list(range())
   D = list(range())
 
