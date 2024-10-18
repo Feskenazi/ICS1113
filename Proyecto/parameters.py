@@ -32,9 +32,9 @@ def get_data(csv_type):
   E = list(range(len(cos_hor)))
   S = list(range(len(des_sit)))
   D = list(range(len(des_sit.columns)))
-  TH =
-  TD =
-  TS =
+  TH = set(range(24))
+  TD = set(range(7))
+  TS = set(range(4))
   
   # Crear parámetros
   
