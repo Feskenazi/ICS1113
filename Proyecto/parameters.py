@@ -39,7 +39,7 @@ def get_data(csv_type):
   # Crear parámetros
 
   CO_ed = {(i, j): int(cos_opor.iat[i, j]) for i in E for j in D}
-  
+  CD_ed = {(i, j): int(cos_despl.iat[i, j]) for i in E for j in D}
 
 
 
