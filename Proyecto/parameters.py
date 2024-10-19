@@ -1,3 +1,5 @@
+# NO TOCAR SIN PREGUNTARME (FELIPE)
+
 import pandas as pd
 # import random (si queremos añadir ruido)
 # random.seed(0)
