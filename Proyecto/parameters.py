@@ -27,8 +27,8 @@ def get_data(csv_type):
   
   # Crear conjuntos
   
-  E = list(range(len(cos_despl.columns)))
-  S = list(range(len(cos_despl)))
+  E = list(range(len(cos_despl.columns))) #columnas de .csv son equipos
+  S = list(range(len(cos_despl))) #filas de .csv son sitios
   TH = list(range(671))
   TD = list(range(7))
   TS = list(range(4))
