@@ -7,8 +7,8 @@ import pandas as pd
 def get_data(csv_type):
     
     if csv_type == "small":
-    
-    #BASE DE DATOS PEQUEÑA
+        
+        #BASE DE DATOS PEQUEÑA
         cos_opor = pd.read_csv(
         'source/small/costo_oportunidad.csv', header=None)
         cos_despl = pd.read_csv(
