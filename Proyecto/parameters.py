@@ -41,7 +41,7 @@ def get_data(csv_type):
   TR_es = {(i, j): int(hor_arreg.iat[i, j]) for i in E for j in S}
   EP_es = {(i, j): int(pue_encarg.iat[i, j]) for i in E for j in S}
 
-  # exporta los conjuntos
+  # Exporta los conjuntos
 
   return E, S, TH, TD, TS, CO_s, CD_es, CH_e, TR_es, EP_es
 
