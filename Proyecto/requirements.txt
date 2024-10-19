@@ -1,4 +1,4 @@
 gurobipy
-numpy
 pandas
+# numpy
 # matplotlib
