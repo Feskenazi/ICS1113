@@ -35,9 +35,17 @@ def get_data(csv_type):
   
   # Crear parámetros
 
-  CO_s = {(i, j): int(.iat[i, j]) for i in E for j in }
-  #CD_ed = {(i, j): int(cos_despl.iat[i, j]) for i in E for j in D}
-  #CH ver que onda 
+  CO_s = {i: int(cos_opor.iat[i, 0]) for i in S}
+  #CD
+  CH_e = {i: int(puede_manejar_profesores.iat[i, 0]) for i in P}
   #SD_sd = {(i, j): int(des_sit.iat[i, j]) for i in S for j in D}
+
+
+
+
+
+
+
+
 
 
