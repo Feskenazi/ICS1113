@@ -21,7 +21,7 @@ def generate_model(PARAMETERS):
     # Función objetivo
 
     # Optimizar
-    model.optimize
+    model.optimize()
 
     # Conformación del archivo solución si es factible/óptimo
 
