@@ -29,7 +29,7 @@ def get_data(csv_type):
   
   E = list(range(len(cos_despl.columns)))
   S = list(range(len(cos_despl)))
-  #TH = list(range(24))
+  TH = list(range(671))
   TD = list(range(7))
   TS = list(range(4))
   
@@ -40,6 +40,10 @@ def get_data(csv_type):
   CH_e = {j: int(cos_hor.iat[0, j]) for j in E}
   TR_es = {(i, j): int(hor_arreg.iat[i, j]) for i in E for j in S}
   EP_es = {(i, j): int(pue_encarg.iat[i, j]) for i in E for j in S}
+
+  # exporta los conjuntos
+
+  return E, S, TH, TD, TS, CO_s, CD_es, CH_e, TR_es, EP_es
 
 
 
