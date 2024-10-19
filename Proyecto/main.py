@@ -12,9 +12,9 @@ if __name__ == '__main__':
   if base_datos == "small":
   parameters = get_data("small")
   
-  #elif base_datos == "x":
-    #parameters = get_data("x") ...
-  
+  elif base_datos == "x":
+    parameters = get_data("x")
+
   else:
     print("Base de datos no encontrada")
     exit()
