@@ -31,7 +31,7 @@ def get_data(csv_type):
   
   E = list(range(len(cos_despl)))
   S = list(range(len(des_sit)))
-  D = list(range(len(des_sit.columns)))
+  #D = list(range(len(des_sit.columns)))
   #TH = list(range(24))
   #TD = list(range(7))
   #TS = list(range(4))
