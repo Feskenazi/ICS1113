@@ -117,12 +117,45 @@ def generate_model(PARAMETERS):
     GRB.MINIMIZE
     )
 
-    # Función objetivo
-
     # Optimizar
     model.optimize()
 
-    # Conformación del archivo solución si es factible/óptimo
+    # Conformación del archivo solución
+
+    if os.path.exists("output/resultado.txt"):
+        os.remove("output/resultado.txt")
+
+    if os.path.exists("output/model.ilp"):
+        os.remove("output/model.ilp")
+    
+    if os.path.exists("output/infeasibility_report.txt"):
+        os.remove("output/infeasibility_report.txt")
+
+    if model.status == GRB.INFEASIBLE:
+        print("El modelo es infactible. Diagnosticando")
+        model.computeIIS()
+        model.write("output/model.ilp")
+
+        with open("output/infeasibility_report.txt", "w") as f:
+            f.write("IIS Report:\n")
+            for c in model.getConstrs():
+                if c.IISConstr:
+                    f.write(f"{c.constrName}\n")
+
+    elif model.status == GRB.OPTIMAL:
+        print("Solución óptima encontrada.")
+        lista = []
+        for e in E:
+            for s in S:
+                for th in TH:
+                    if U_e_s_th[e, s, th].X > 0.5:
+                        lista.append(f"El equipo {e} comienza a trabajar en el sitio {s} en la hora {th}.")
+
+        result.append(f"Valor objetivo: {model.objVal}")
+        result.append(f"Tiempo de ejecución: {model.Runtime}")
+        archivo = open("output/resultado.txt", "w")
+
+        
 
     return None
 
