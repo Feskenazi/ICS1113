@@ -5,8 +5,22 @@ import pandas as pd
 # random.seed(0)
 
 def get_data(csv_type):
+
+    if csv_type == "real":
+        
+        #BASE DE DATOS REAL
+        cos_opor = pd.read_csv(
+        'source/real/r_costo_oportunidad.csv', header=None)
+        cos_despl = pd.read_csv(
+        'source/real/r_costos_por_despliegue.csv', header=None)
+        cos_hor = pd.read_csv(
+        'source/real/r_costos_por_hora.csv', header=None)
+        hor_arreg = pd.read_csv(
+        'source/real/r_horas_arreglo.csv', header=None)
+        pue_encarg = pd.read_csv(
+        'source/real/r_puede_encargarse.csv', header=None)
     
-    if csv_type == "small":
+    elif csv_type == "small":
         
         #BASE DE DATOS PEQUEÑA
         cos_opor = pd.read_csv(
@@ -20,12 +34,11 @@ def get_data(csv_type):
         pue_encarg = pd.read_csv(
         'source/small/puede_encargarse.csv', header=None)
         
-    #elif csv_type == "real":
     #elif OTRA BASE
     #elif OTRA BASE
 
 
-    # COMPARTIDO--------------------
+    # COMPARTIDO
   
     # Crear conjuntos
   
