@@ -9,11 +9,11 @@ if __name__ == '__main__':
     
     base_datos = input("Introducir la base de datos que se quiere utilizar: ")
     
-    if base_datos == "small":
-        parameters = get_data("small")
-  
-    elif base_datos == "real":
+    if base_datos == "real":
         parameters = get_data("real")
+  
+    elif base_datos == "small":
+        parameters = get_data("small")
 
     else:
         print("Base de datos introducida no encontrada")
