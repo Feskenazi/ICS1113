@@ -152,8 +152,8 @@ def generate_model(PARAMETERS):
                         if U_e_s_th[e, s, th].X > 0.5:
                             lista.append(f"El equipo {e} comienza a trabajar en el sitio {s} en la hora {th}.")
     
-            result.append(f"Valor objetivo: {model.objVal}")
-            result.append(f"Tiempo de ejecución: {model.Runtime}")
+            lista.append(f"Valor objetivo: {model.objVal}")
+            lista.append(f"Tiempo de ejecución: {model.Runtime}")
             archivo = open("output/resultado.txt", "w")
 
             for l in lista:
@@ -170,8 +170,8 @@ def generate_model(PARAMETERS):
                         if U_e_s_th[e, s, th].X > 0.5:
                             lista.append(f"El equipo {e} comienza a trabajar en el sitio {s} en la hora {th}.")
     
-            result.append(f"Valor objetivo: {model.objVal}")
-            result.append(f"Tiempo de ejecución: {model.Runtime}")
+            lista.append(f"Valor objetivo: {model.objVal}")
+            lista.append(f"Tiempo de ejecución: {model.Runtime}")
             archivo = open("output/resultado.txt", "w")
 
             for l in lista:
