@@ -142,18 +142,25 @@ def generate_model(PARAMETERS):
                 if c.IISConstr:
                     f.write(f"{c.constrName}\n")
 
-    elif model.status == GRB.OPTIMAL:
-        print("Solución óptima encontrada.")
-        lista = []
-        for e in E:
-            for s in S:
-                for th in TH:
-                    if U_e_s_th[e, s, th].X > 0.5:
-                        lista.append(f"El equipo {e} comienza a trabajar en el sitio {s} en la hora {th}.")
+    else:
+        if model.status == GRB.OPTIMAL:
+            print("Solución óptima encontrada.")
+            lista = []
+            for e in E:
+                for s in S:
+                    for th in TH:
+                        if U_e_s_th[e, s, th].X > 0.5:
+                            lista.append(f"El equipo {e} comienza a trabajar en el sitio {s} en la hora {th}.")
+    
+            result.append(f"Valor objetivo: {model.objVal}")
+            result.append(f"Tiempo de ejecución: {model.Runtime}")
+            archivo = open("output/resultado.txt", "w")
 
-        result.append(f"Valor objetivo: {model.objVal}")
-        result.append(f"Tiempo de ejecución: {model.Runtime}")
-        archivo = open("output/resultado.txt", "w")
+            for l in lista:
+                archivo.write(l + "\n")
+            archivo.close()
+
+        else:
 
         
 
