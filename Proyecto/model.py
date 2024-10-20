@@ -161,6 +161,22 @@ def generate_model(PARAMETERS):
             archivo.close()
 
         else:
+            print("No se encontró solución óptima o existe un problema con el modelo.")
+            print(f"Tiempo de ejecución: {model.Runtime}")
+            lista = []
+            for e in E:
+                for s in S:
+                    for th in TH:
+                        if U_e_s_th[e, s, th].X > 0.5:
+                            lista.append(f"El equipo {e} comienza a trabajar en el sitio {s} en la hora {th}.")
+    
+            result.append(f"Valor objetivo: {model.objVal}")
+            result.append(f"Tiempo de ejecución: {model.Runtime}")
+            archivo = open("output/resultado.txt", "w")
+
+            for l in lista:
+                archivo.write(l + "\n")
+            archivo.close()
 
         
 
