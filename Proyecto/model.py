@@ -43,7 +43,7 @@ def generate_model(PARAMETERS):
     # 3. Si un equipo estará trabajando si repara al menos un sitio en una hora, las horas de trabajo seguidas de un equipo debe ser máximo 10 horas
     for e in E:
         for th in range(1, len(TH)):
-            model.addConstr(HW_e_th[e, th] >= HW_e_th[e, th-1] + 1 + 11 * gp.quicksum(X_e_s_th[e, s, th] for s in S) - 1, name="R3a")
+            model.addConstr(HW_e_th[e, th] >= HW_e_th[e, th-1] + 1 + 11 * (gp.quicksum(X_e_s_th[e, s, th] for s in S) - 1), name="R3a")
             model.addConstr(HW_e_th[e, th] <= HW_e_th[e, th-1] + 1 + gp.quicksum(X_e_s_th[e, s, th] for s in S) - 1, name="R3b")
         model.addConstr(HW_e_th[e, 0] == gp.quicksum(X_e_s_th[e, s, 0] for s in S), name="R3c")
         for th in TH:
@@ -53,8 +53,8 @@ def generate_model(PARAMETERS):
     for e in E:
         for s in S:
             for th in range(1, len(TH)):
-                model.addConstr(TU_e_s_th[e, s, th] >= TU_e_s_th[e, s, th-1] + 1 + 11 * gp.quicksum(X_e_s_th[e, s, th] for s in S) - 1, name="R4a")
-                model.addConstr(TU_e_s_th[e, s, th] <= TU_e_s_th[e, s, th-1] + 1 + 1 - gp.quicksum(X_e_s_th[e, s, th] for s in S), name="R4b")
+                model.addConstr(TU_e_s_th[e, s, th] >= TU_e_s_th[e, s, th-1] + 1 + 11 * (X_e_s_th[e, s, th] - 1), name="R4a")
+                model.addConstr(TU_e_s_th[e, s, th] <= TU_e_s_th[e, s, th-1] + 1 + 1 - X_e_s_th[e, s, th], name="R4b")
             model.addConstr(TU_e_s_th[e, s, 0] == gp.quicksum(X_e_s_th[e, s, 0] for s in S), name="R4c")
     # 5. Un equipo debe haber terminado la reparación de un sitio sin detenerse una vez empezado
     for e in E:
@@ -85,7 +85,6 @@ def generate_model(PARAMETERS):
     # 9. Tiempo transcurrido desde que se produjo el daño por desastre hasta que algún equipo lo repara
     for s in S:
         model.addConstr(TM_s[s] == gp.quicksum((th + TR_es[s,e]) * U_e_s_th[e, s, th] for e in E for th in TH), name="R9")
-
 
     # 10. Un equipo solo puede reparar los daños de un sitio si está facultado para ello
     for e in E:
@@ -181,3 +180,4 @@ def generate_model(PARAMETERS):
         
 
     return None
+
