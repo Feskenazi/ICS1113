@@ -44,7 +44,7 @@ def get_data(csv_type):
   
     E = list(range(len(cos_despl.columns))) #columnas de .csv son equipos
     S = list(range(len(cos_despl))) #filas de .csv son sitios
-    TH = list(range(671))
+    TH = list(range(672))
     TD = list(range(7))
     TS = list(range(4))
   
