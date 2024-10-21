@@ -61,7 +61,7 @@ def generate_model(PARAMETERS):
         for s in S:
             for th in TH:
                 model.addConstr(TU_e_s_th[e, s, th] <= TR_es[s, e], name="R5a")
-            for th in range(len(TH) - TR_es[e, s]):
+            for th in range(len(TH) - TR_es[s, e]):
                 model.addConstr(U_e_s_th[e, s, th] * TR_es[s, e] == TU_e_s_th[e, s, th + TR_es[s, e] - 1], name="R5b")
 
     # 6. Cada sitio con daño asociado a desastre debe repararse. Solo un equipo trabaja por sitio
