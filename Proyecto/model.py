@@ -90,7 +90,6 @@ def generate_model(PARAMETERS):
     # 10. Un equipo solo puede reparar los daños de un sitio si está facultado para ello
     for e in E:
         for s in S:
-            print(e,s)
             model.addConstr(gp.quicksum(U_e_s_th[e, s, th] for th in TH) <= EP_es[s, e], name="R10")
 
     # 11. Un equipo puede trabajar máximo 44 horas semanales
