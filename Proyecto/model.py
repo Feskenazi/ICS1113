@@ -101,7 +101,7 @@ def generate_model(PARAMETERS):
     # 12. Se deben tener 2 días de descanso a la semana al haber trabajado los otros 5
     for e in E:
         for ts in TS:
-            model.addConstr(gp.quicksum(Z_e_td_ts[e, td, ts] for td in TD) <= 6 - Z_e_td_ts[e, 7, ts], name="R12")
+            model.addConstr(gp.quicksum(Z_e_td_ts[e, td, ts] for td in TD) <= 6 - Z_e_td_ts[e, 6, ts], name="R12")
 
     # 13. Se habrá trabajado en un día td de una semana ts si se ha trabajado al menos una vez durante una hora th de dicho día
     for e in E:
