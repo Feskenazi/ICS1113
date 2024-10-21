@@ -84,7 +84,8 @@ def generate_model(PARAMETERS):
 
     # 9. Tiempo transcurrido desde que se produjo el daño por desastre hasta que algún equipo lo repara
     for s in S:
-        model.addConstr(TM_s[s] == gp.quicksum((th + TR_es[s,e])* U_e_s_th[e, s, th]) for e in E for th in TH, name="R9")
+        model.addConstr(TM_s[s] == gp.quicksum((th + TR_es[s,e]) * U_e_s_th[e, s, th] for e in E for th in TH), name="R9")
+
 
     # 10. Un equipo solo puede reparar los daños de un sitio si está facultado para ello
     for e in E:
