@@ -51,10 +51,10 @@ def get_data(csv_type):
     # Crear parámetros
 
     CO_s = {i: int(cos_opor.iat[i, 0]) for i in S}
-    CD_es = {(i, j): int(cos_despl.iat[i, j]) for i in E for j in S}
+    CD_es = {(i, j): int(cos_despl.iat[i, j]) for i in S for j in E}
     CH_e = {j: int(cos_hor.iat[0, j]) for j in E}
-    TR_es = {(i, j): int(hor_arreg.iat[i, j]) for i in E for j in S}
-    EP_es = {(i, j): int(pue_encarg.iat[i, j]) for i in E for j in S}
+    TR_es = {(i, j): int(hor_arreg.iat[i, j]) for i in S for j in E}
+    EP_es = {(i, j): int(pue_encarg.iat[i, j]) for i in S for j in E}
 
     # Exporta los conjuntos
 
