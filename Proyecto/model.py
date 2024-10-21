@@ -47,7 +47,7 @@ def generate_model(PARAMETERS):
             model.addConstr(HW_e_th[e, th] <= HW_e_th[e, th-1] + 1 + gp.quicksum(X_e_s_th[e, s, th] for s in S) - 1, name="R3b")
         model.addConstr(HW_e_th[e, 0] == gp.quicksum(X_e_s_th[e, s, 0] for s in S), name="R3c")
         for th in TH:
-            model.addConstr(HD_e_th[e, th-1] <= 10 * gp.quicksum(X_e_s_th[e, s, th] for s in S), name="R3d")
+            model.addConstr(HW_e_th[e, th] <= 10 * gp.quicksum(X_e_s_th[e, s, th] for s in S), name="R3d")
 
     # 4. Tiempo acumulado en horas que un equipo ha estado trabajando en un sitio
     for e in E:
@@ -56,14 +56,13 @@ def generate_model(PARAMETERS):
                 model.addConstr(TU_e_s_th[e, s, th] >= TU_e_s_th[e, s, th-1] + 1 + 11 * gp.quicksum(X_e_s_th[e, s, th] for s in S) - 1, name="R4a")
                 model.addConstr(TU_e_s_th[e, s, th] <= TU_e_s_th[e, s, th-1] + 1 + 1 - gp.quicksum(X_e_s_th[e, s, th] for s in S), name="R4b")
             model.addConstr(TU_e_s_th[e, s, 0] == gp.quicksum(X_e_s_th[e, s, 0] for s in S), name="R4c")
-
     # 5. Un equipo debe haber terminado la reparación de un sitio sin detenerse una vez empezado
     for e in E:
         for s in S:
             for th in TH:
-                model.addConstr(TU_e_s_th[e, s, th] <= TR_es[e, s], name="R5a")
+                model.addConstr(TU_e_s_th[e, s, th] <= TR_es[s, e], name="R5a")
             for th in range(len(TH) - TR_es[e, s]):
-                model.addConstr(U_e_s_th[e, s, th] * TR_es[e, s] == TU_e_s_th[e, s, th + TR_es[e, s] - 1], name="R5b")
+                model.addConstr(U_e_s_th[e, s, th] * TR_es[s, e] == TU_e_s_th[e, s, th + TR_es[s, e] - 1], name="R5b")
 
     # 6. Cada sitio con daño asociado a desastre debe repararse. Solo un equipo trabaja por sitio
     for s in S:
@@ -85,12 +84,13 @@ def generate_model(PARAMETERS):
 
     # 9. Tiempo transcurrido desde que se produjo el daño por desastre hasta que algún equipo lo repara
     for s in S:
-        model.addConstr(TM_s[s] == gp.quicksum(th * U_e_s_th[e, s, th] for e in E for th in TH), name="R9")
+        model.addConstr(TM_s[s] == gp.quicksum((th + TR_es[s,e])* U_e_s_th[e, s, th]) for e in E for th in TH, name="R9")
 
     # 10. Un equipo solo puede reparar los daños de un sitio si está facultado para ello
     for e in E:
         for s in S:
-            model.addConstr(gp.quicksum(U_e_s_th[e, s, th] for th in TH) <= EP_es[e, s], name="R10")
+            print(e,s)
+            model.addConstr(gp.quicksum(U_e_s_th[e, s, th] for th in TH) <= EP_es[s, e], name="R10")
 
     # 11. Un equipo puede trabajar máximo 44 horas semanales
     for e in E:
@@ -112,7 +112,7 @@ def generate_model(PARAMETERS):
     # Función objetivo
     model.setObjective(
     gp.quicksum(CO_s[s] * TM_s[s] for s in S) +
-    gp.quicksum(CD_es[e, s] * U_e_s_th[e, s, th] for e in E for s in S for th in TH) +
+    gp.quicksum(CD_es[s, e] * U_e_s_th[e, s, th] for e in E for s in S for th in TH) +
     gp.quicksum(CH_e[e] * X_e_s_th[e, s, th] for e in E for s in S for th in TH),
     GRB.MINIMIZE
     )
@@ -181,8 +181,3 @@ def generate_model(PARAMETERS):
         
 
     return None
-
-
-
-
-
