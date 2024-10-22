@@ -68,23 +68,6 @@ def generate_model(PARAMETERS):
             for th in range(0, len(TH) - TR_es[s, e]):
                 model.addConstr(1000*(1 - U_e_s_th[e, s, th]) * TR_es[s, e] + U_e_s_th[e, s, th] * TR_es[s, e] >= TU_e_s_th[e, s, th + TR_es[s, e] - 1])
                 
-            #for th in range(len(TH) - TR_es[s, e] + 1):
-             #   model.addConstr(gp.quicksum(X_e_s_th[e, s, th] for th in range(th, th + TR_es[s, e] -1)) >= U_e_s_th[e, s, th] * TR_es[e, s] , name="R5B")
-            #for th in range(len(TH) - TR_es[s, e] + 1 ):
-             #   model.addConstr(gp.quicksum(X_e_s_th[e, s, th] for th in range(th, th + TR_es[s, e] -1)) <= U_e_s_th[e, s, th] * TR_es[e, s] +  1000 * (1 - U_e_s_th[e, s, th]), name="R5B")
-                
-            #for th in range(len(TH) - TR_es[s, e] -1):
-             #   model.addConstr(U_e_s_th[e, s, th] * TR_es[e, s] <= TU_e_s_th[e, s, th + TR_es[e, s] - 1])
-            #for th in range(len(TH) - TR_es[s, e] - 1):
-             #   model.addConstr(1000*(1 - U_e_s_th[e, s, th]) * TR_es[e, s] + U_e_s_th[e, s, th] * TR_es[e, s] >= TU_e_s_th[e, s, th + TR_es[e, s] - 1])
-            #for th in range(len(TH) - TR_es[s, e]):
-             #   model.addConstr(U_e_s_th[e, s, th] * TR_es[s, e] == TU_e_s_th[e, s, th + TR_es[s, e] -1 ], name="R5b")
-           # for th in range(len(TH) - TR_es[s, e] + 1):
-            #    model.addConstr(gp.quicksum(X_e_s_th[e, s, th] for th in range(th, th + TR_es[s, e] -1)) >= U_e_s_th[e, s, th] * TR_es[e, s] , name="R5B")
-          #  for th in range(len(TH) - TR_es[s, e] + 1 ):
-           #     model.addConstr(gp.quicksum(X_e_s_th[e, s, th] for th in range(th, th + TR_es[s, e] -1)) <= U_e_s_th[e, s, th] * TR_es[e, s] +  1000 * (1 - U_e_s_th[e, s, th]), name="R5B")
-              #  model.addConstr(X_e_s_th[e,s,th] <= U_e_s_th[e,s,th] * TR_es[s, e])
-
     # 6. Cada sitio con daño asociado a desastre debe repararse. Solo un equipo trabaja por sitio
     for s in S:
         model.addConstr(gp.quicksum(U_e_s_th[e, s, th] for e in E for th in TH) == 1, name="R6")
@@ -164,13 +147,6 @@ def generate_model(PARAMETERS):
 
     else:
         if model.status == GRB.OPTIMAL:
-            #for s in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]:
-                #print(f"----------------Sitio {s}----------------")
-                #for th in range(60):
-                 #   print(f"------Hora {th}--------")
-                  #  print(f"TU Equipo 0: {TU_e_s_th[0, s, th].X}")
-                   # print(f"U Equipo 0: {U_e_s_th[0, s, th].X}")
-                    #print(f"X Equipo 0: {X_e_s_th[0, s, th].X}")
             print("Solución óptima encontrada.")
             lista = []
             for e in E:
@@ -204,11 +180,6 @@ def generate_model(PARAMETERS):
             for l in lista:
                 archivo.write(l + "\n")
             archivo.close()
-
-        
-
-    return None
-
 
     return None
 
