@@ -1,6 +1,8 @@
 # ICS1113
 Proyecto de optimización 2024-2
 
+Existe dentro de este repositorio un documento excel con la explicación detallada de cómo se conformaron los conjuntos y parámetros.
+
 ## Estructura del código
 
 ```bash
