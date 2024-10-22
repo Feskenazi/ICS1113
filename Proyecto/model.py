@@ -36,8 +36,9 @@ def generate_model(PARAMETERS):
         for th in range(1, len(TH)):
             model.addConstr(HD_e_th[e, th] >= HD_e_th[e, th-1] + 1 - 672 * gp.quicksum(X_e_s_th[e, s, th] for s in S), name="R2a")
             model.addConstr(HD_e_th[e, th] <= HD_e_th[e, th-1] + 1 - gp.quicksum(X_e_s_th[e, s, th] for s in S), name="R2b")
+            #model.addConstr(HD_e_th[e,th] <= 16 * (1 - gp.quicksum(X_e_s_th[e, s, th] for s in S)))
         model.addConstr(HD_e_th[e, 0] == 1 - gp.quicksum(X_e_s_th[e, s, 0] for s in S), name="R2c")
-        for th in range(17, len(TH)):
+        for th in range(9, len(TH)):
             model.addConstr(HD_e_th[e, th-1] >= 16 * gp.quicksum(U_e_s_th[e, s, th] for s in S), name="R2d")
 
     # 3. Si un equipo estará trabajando si repara al menos un sitio en una hora, las horas de trabajo seguidas de un equipo debe ser máximo 10 horas
@@ -55,14 +56,34 @@ def generate_model(PARAMETERS):
             for th in range(1, len(TH)):
                 model.addConstr(TU_e_s_th[e, s, th] >= TU_e_s_th[e, s, th-1] + 1 + 11 * (X_e_s_th[e, s, th] - 1), name="R4a")
                 model.addConstr(TU_e_s_th[e, s, th] <= TU_e_s_th[e, s, th-1] + 1 + 1 - X_e_s_th[e, s, th], name="R4b")
-            model.addConstr(TU_e_s_th[e, s, 0] == X_e_s_th[e, s, 0], name="R4c")
+                model.addConstr(TU_e_s_th[e, s, th] <= 1000 *  X_e_s_th[e, s, th])
+            model.addConstr(TU_e_s_th[e, s, 0] == (X_e_s_th[e, s, 0]), name="R4c")
     # 5. Un equipo debe haber terminado la reparación de un sitio sin detenerse una vez empezado
     for e in E:
         for s in S:
             for th in TH:
                 model.addConstr(TU_e_s_th[e, s, th] <= TR_es[s, e], name="R5a")
-            for th in range(len(TH) - TR_es[s, e]):
-                model.addConstr(U_e_s_th[e, s, th] * TR_es[s, e] == TU_e_s_th[e, s, th + TR_es[s, e] - 1], name="R5b")
+            for th in range(0, len(TH) - TR_es[s, e]):
+                model.addConstr(U_e_s_th[e, s, th] * TR_es[s, e] <= TU_e_s_th[e, s, th + TR_es[s, e] - 1])
+            for th in range(0, len(TH) - TR_es[s, e]):
+                model.addConstr(1000*(1 - U_e_s_th[e, s, th]) * TR_es[s, e] + U_e_s_th[e, s, th] * TR_es[s, e] >= TU_e_s_th[e, s, th + TR_es[s, e] - 1])
+                
+            #for th in range(len(TH) - TR_es[s, e] + 1):
+             #   model.addConstr(gp.quicksum(X_e_s_th[e, s, th] for th in range(th, th + TR_es[s, e] -1)) >= U_e_s_th[e, s, th] * TR_es[e, s] , name="R5B")
+            #for th in range(len(TH) - TR_es[s, e] + 1 ):
+             #   model.addConstr(gp.quicksum(X_e_s_th[e, s, th] for th in range(th, th + TR_es[s, e] -1)) <= U_e_s_th[e, s, th] * TR_es[e, s] +  1000 * (1 - U_e_s_th[e, s, th]), name="R5B")
+                
+            #for th in range(len(TH) - TR_es[s, e] -1):
+             #   model.addConstr(U_e_s_th[e, s, th] * TR_es[e, s] <= TU_e_s_th[e, s, th + TR_es[e, s] - 1])
+            #for th in range(len(TH) - TR_es[s, e] - 1):
+             #   model.addConstr(1000*(1 - U_e_s_th[e, s, th]) * TR_es[e, s] + U_e_s_th[e, s, th] * TR_es[e, s] >= TU_e_s_th[e, s, th + TR_es[e, s] - 1])
+            #for th in range(len(TH) - TR_es[s, e]):
+             #   model.addConstr(U_e_s_th[e, s, th] * TR_es[s, e] == TU_e_s_th[e, s, th + TR_es[s, e] -1 ], name="R5b")
+           # for th in range(len(TH) - TR_es[s, e] + 1):
+            #    model.addConstr(gp.quicksum(X_e_s_th[e, s, th] for th in range(th, th + TR_es[s, e] -1)) >= U_e_s_th[e, s, th] * TR_es[e, s] , name="R5B")
+          #  for th in range(len(TH) - TR_es[s, e] + 1 ):
+           #     model.addConstr(gp.quicksum(X_e_s_th[e, s, th] for th in range(th, th + TR_es[s, e] -1)) <= U_e_s_th[e, s, th] * TR_es[e, s] +  1000 * (1 - U_e_s_th[e, s, th]), name="R5B")
+              #  model.addConstr(X_e_s_th[e,s,th] <= U_e_s_th[e,s,th] * TR_es[s, e])
 
     # 6. Cada sitio con daño asociado a desastre debe repararse. Solo un equipo trabaja por sitio
     for s in S:
@@ -143,12 +164,19 @@ def generate_model(PARAMETERS):
 
     else:
         if model.status == GRB.OPTIMAL:
+            #for s in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]:
+                #print(f"----------------Sitio {s}----------------")
+                #for th in range(60):
+                 #   print(f"------Hora {th}--------")
+                  #  print(f"TU Equipo 0: {TU_e_s_th[0, s, th].X}")
+                   # print(f"U Equipo 0: {U_e_s_th[0, s, th].X}")
+                    #print(f"X Equipo 0: {X_e_s_th[0, s, th].X}")
             print("Solución óptima encontrada.")
             lista = []
             for e in E:
                 for s in S:
                     for th in TH:
-                        if U_e_s_th[e, s, th].X > 0.5:
+                        if U_e_s_th[e, s, th].X == 1:
                             lista.append(f"El equipo {e} comienza a trabajar en el sitio {s} en la hora {th}.")
     
             lista.append(f"Valor objetivo: {model.objVal}")
@@ -178,6 +206,9 @@ def generate_model(PARAMETERS):
             archivo.close()
 
         
+
+    return None
+
 
     return None
 
