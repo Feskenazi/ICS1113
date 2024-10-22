@@ -37,7 +37,7 @@ def generate_model(PARAMETERS):
             model.addConstr(HD_e_th[e, th] >= HD_e_th[e, th-1] + 1 - 672 * gp.quicksum(X_e_s_th[e, s, th] for s in S), name="R2a")
             model.addConstr(HD_e_th[e, th] <= HD_e_th[e, th-1] + 1 - gp.quicksum(X_e_s_th[e, s, th] for s in S), name="R2b")
         model.addConstr(HD_e_th[e, 0] == 1 - gp.quicksum(X_e_s_th[e, s, 0] for s in S), name="R2c")
-        for th in range(1, len(TH)):
+        for th in range(17, len(TH)):
             model.addConstr(HD_e_th[e, th-1] >= 16 * gp.quicksum(U_e_s_th[e, s, th] for s in S), name="R2d")
 
     # 3. Si un equipo estará trabajando si repara al menos un sitio en una hora, las horas de trabajo seguidas de un equipo debe ser máximo 10 horas
@@ -55,7 +55,7 @@ def generate_model(PARAMETERS):
             for th in range(1, len(TH)):
                 model.addConstr(TU_e_s_th[e, s, th] >= TU_e_s_th[e, s, th-1] + 1 + 11 * (X_e_s_th[e, s, th] - 1), name="R4a")
                 model.addConstr(TU_e_s_th[e, s, th] <= TU_e_s_th[e, s, th-1] + 1 + 1 - X_e_s_th[e, s, th], name="R4b")
-            model.addConstr(TU_e_s_th[e, s, 0] == gp.quicksum(X_e_s_th[e, s, 0] for s in S), name="R4c")
+            model.addConstr(TU_e_s_th[e, s, 0] == X_e_s_th[e, s, 0], name="R4c")
     # 5. Un equipo debe haber terminado la reparación de un sitio sin detenerse una vez empezado
     for e in E:
         for s in S:
