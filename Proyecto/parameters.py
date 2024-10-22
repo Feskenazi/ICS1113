@@ -1,8 +1,4 @@
-# NO TOCAR SIN PREGUNTARME (FELIPE)
-
 import pandas as pd
-# import random (si queremos añadir ruido)
-# random.seed(0)
 
 def get_data(csv_type):
 
@@ -34,9 +30,6 @@ def get_data(csv_type):
         pue_encarg = pd.read_csv(
         'source/small/puede_encargarse.csv', header=None)
         
-    #elif OTRA BASE
-    #elif OTRA BASE
-
 
     # COMPARTIDO
   
