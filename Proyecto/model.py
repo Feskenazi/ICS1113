@@ -55,8 +55,8 @@ def generate_model(PARAMETERS):
         for s in S:
             for th in range(1, len(TH)):
                 model.addConstr(TU_e_s_th[e, s, th] >= TU_e_s_th[e, s, th-1] + 1 + 11 * (X_e_s_th[e, s, th] - 1), name="R4a")
-                model.addConstr(TU_e_s_th[e, s, th] <= TU_e_s_th[e, s, th-1] + 1 + 1 - X_e_s_th[e, s, th], name="R4b")
-                model.addConstr(TU_e_s_th[e, s, th] <= 1000 *  X_e_s_th[e, s, th])
+                model.addConstr(TU_e_s_th[e, s, th] <= TU_e_s_th[e, s, th-1] + 1 + (1 - X_e_s_th[e, s, th]), name="R4b")
+                model.addConstr(TU_e_s_th[e, s, th] <= 11 *  X_e_s_th[e, s, th])
             model.addConstr(TU_e_s_th[e, s, 0] == (X_e_s_th[e, s, 0]), name="R4c")
     # 5. Un equipo debe haber terminado la reparación de un sitio sin detenerse una vez empezado
     for e in E:
