@@ -1,0 +1,22 @@
+El equipo 0 comienza a trabajar en el sitio 16 en la hora 5.
+El equipo 0 comienza a trabajar en el sitio 18 en la hora 0.
+El equipo 1 comienza a trabajar en el sitio 9 en la hora 3.
+El equipo 1 comienza a trabajar en el sitio 10 en la hora 0.
+El equipo 1 comienza a trabajar en el sitio 17 en la hora 6.
+El equipo 2 comienza a trabajar en el sitio 4 en la hora 0.
+El equipo 2 comienza a trabajar en el sitio 19 en la hora 6.
+El equipo 3 comienza a trabajar en el sitio 14 en la hora 0.
+El equipo 3 comienza a trabajar en el sitio 15 en la hora 5.
+El equipo 4 comienza a trabajar en el sitio 1 en la hora 28.
+El equipo 4 comienza a trabajar en el sitio 2 en la hora 8.
+El equipo 4 comienza a trabajar en el sitio 5 en la hora 0.
+El equipo 4 comienza a trabajar en el sitio 6 en la hora 6.
+El equipo 4 comienza a trabajar en el sitio 8 en la hora 2.
+El equipo 4 comienza a trabajar en el sitio 13 en la hora 4.
+El equipo 5 comienza a trabajar en el sitio 0 en la hora 2.
+El equipo 5 comienza a trabajar en el sitio 3 en la hora 6.
+El equipo 5 comienza a trabajar en el sitio 7 en la hora 0.
+El equipo 5 comienza a trabajar en el sitio 11 en la hora 8.
+El equipo 5 comienza a trabajar en el sitio 12 en la hora 4.
+Valor objetivo: 44963805.0
+Tiempo de ejecución: 511.3910000324249
